@@ -1,9 +1,8 @@
-markdown
-# Static Files (D:\az\blog\My_blog\static)
-
-## css/style.css
-
-```css
+# Static Files (blog\My_blog\static)
+- static
+    - style
+        - css/style.css
+            ```css
 /* static/css/style.css */
 
 /* ================== */
@@ -249,9 +248,14 @@ a:hover {
   -webkit-backdrop-filter: blur(5px);
 }
 #theme-music-player:hover { opacity: 1; transform: scale(1.02); }
-js/theme.js
+        ```
+    - js
+         -  js/theme.js
+         ```
 javascript
-// D:/az/blog/My_blog/static/js/theme.js
+```
+### blog/My_blog/static/js/theme.js
+```
 document.addEventListener('DOMContentLoaded', () => {
     const themeToggleButton = document.getElementById('themeToggle');
     if (!themeToggleButton) return;
@@ -380,9 +384,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // --- 暴露给 navigation.js ---
 window.reapplyVisualBackgroundTheme = initializePageElements; // AJAX 加载后调用这个
-js/navigation.js
+```
+## js/navigation.js
 javascript
-// static/js/navigation.js
+### static/js/navigation.js
 document.addEventListener('DOMContentLoaded', () => {
     const ajaxContainerId = 'ajax-content-container';
 
@@ -462,7 +467,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.state?.path) { loadPage(event.state.path, false); }
     });
 });
-base.html
+## templates
+### templates/base.html
 html
 <!doctype html>
 <html lang="zh-CN"> {# JS 会在这里设置 data-theme 和 data-bs-theme #}
@@ -749,7 +755,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 {% endblock %}
-edit_post.html
+###edit_post.html
 html
 {% extends "base.html" %}
 
