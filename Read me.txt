@@ -1,0 +1,39 @@
+如果您要运行该程序要做以下步骤
+1.打开终端，进入 D:\az\blog
+如在终端定位
+cd D:\az\blog
+2. 删除 instance 文件夹和 migrations 文件夹。(已删除）
+3.激活虚拟环境。
+如输入（在Win CMD）
+D:\az\blog\.venv\Scripts\activate.bat 
+4.安装依赖
+pip install Flask Flask-SQLAlchemy Flask-Migrate Flask-Login Flask-Whooshee markdown bleach python-dotenv
+5.初始化数据库
+flask db init（只需运行一次）
+flask db migrate
+flask db upgrade
+附：
+第一次运行需要在command.py加入db.create_all()代码
+如# My_blog/command.py
+import click
+from flask.cli import with_appcontext
+
+@click.command('init-db')
+@with_appcontext
+def init_db_command():
+    """初始化数据库（只运行一次）"""
+    db.create_all()
+    click.echo('数据库已初始化')
+
+def init_app(app):
+    app.cli.add_command(init_db_command)  # 注册命令
+然后在 create_app() 中注册：
+
+python
+# My_blog/__init__.py
+from .command import init_app as init_command_app
+
+def create_app():
+    # ...其他代码...
+    init_command_app(app)  # 注册命令
+    return app
