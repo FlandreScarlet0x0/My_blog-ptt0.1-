@@ -1,51 +1,41 @@
-Flask 博客项目完整代码文档
-1. 项目简介
-这是一个功能完善的个人博客系统，基于 Flask 框架构建。主要功能包括：
+# 我的 Flask 博客项目文档
 
-用户系统: 用户注册、登录、登出、个人资料编辑。
-文章系统: 使用 Markdown 创建、编辑、删除文章，支持分类和标签。
-富文本编辑: 集成 EasyMDE 编辑器，支持图片和视频上传。
-评论系统: 支持对文章进行评论和回复。
-主题系统:
-浅色/深色颜色模式切换。
-多种视觉主题切换（关联不同的背景图片和背景音乐）。
-前端体验: AJAX 无刷新页面导航，带来单页应用（SPA）般的流畅体验。
-后台管理: 为管理员提供用户管理和文章管理的基础后台。
-2. 项目结构
-请务必遵循以下文件和文件夹结构来组织您的项目：
+这是一个基于 Flask 框架构建的个人博客项目。它支持用户注册、登录、发布和编辑文章（使用 Markdown）、上传图片和视频、文章分类与标签、评论系统、以及多种视觉主题切换（包含背景音乐）。
 
-D:\az\blog\
+## 项目结构
+
+为了确保项目能正确运行，请遵循以下文件结构：
+
+```
+/D:/az/blog/
 |
-├── .flaskenv              # 环境变量文件 (重要!)
+├── .flaskenv              # <--- 环境变量文件
 |
-├── instance/              # Flask 自动创建，用于存放数据库等实例文件
+├── instance/              # <--- Flask 自动创建，用于存放数据库等
+|   └── blog.db
 |
-├── migrations/            # Flask-Migrate 数据库迁移脚本
+├── migrations/            # <--- Flask-Migrate 的迁移文件
 |
-├── My_blog/               # Flask 应用核心包
+├── My_blog/               # <--- Flask 应用核心包
 |   |
-|   ├── __init__.py        # 应用工厂函数 (核心)
-|   ├── config.py          # 应用配置文件
-|   ├── extensions.py      # Flask 扩展统一定义
-|   ├── models.py          # 数据库模型
-|   ├── command.py         # 自定义命令行
+|   ├── __init__.py        # <--- 应用工厂
+|   ├── config.py          # <--- 配置文件
+|   ├── extensions.py      # <--- Flask 扩展
+|   ├── models.py          # <--- 数据库模型
+|   ├── command.py         # <--- 自定义命令 (例如创建管理员)
 |   |
-|   ├── routes/            # 路由蓝图
-|   |   ├── main.py
-|   |   ├── auth.py
-|   |   └── admin.py
-|   |
-|   ├── static/            # 静态文件
+|   ├── static/            # <--- 静态文件
 |   |   ├── css/
 |   |   │   └── style.css
 |   |   ├── js/
-|   |   │   ├── theme.js
 |   |   │   ├── background_fade.js
-|   |   │   └── navigation.js
-|   |   ├── images/        # (需要手动创建，用于存放背景图等)
-|   |   └── uploads/       # (程序会自动创建，用于存放用户上传的文件)
+|   |   │   ├── navigation.js
+|   |   │   └── theme.js
+|   |   ├── images/
+|   |   │   └── (存放背景图片等)
+|   |   └── uploads/       # <--- 用户上传的文件
 |   |
-|   └── templates/         # Jinja2 模板
+|   └── templates/         # <--- Jinja2 模板
 |       ├── base.html
 |       ├── index.html
 |       ├── post.html
@@ -55,50 +45,103 @@ D:\az\blog\
 |       ├── register.html
 |       ├── profile.html
 |       ├── edit_profile.html
-|       |
-|       └── admin/         # 后台管理模板
-|           ├── index.html
-|           ├── users.html
-|           └── posts.html
+|       └── search.html
 |
-└── run.py                 # 应用启动脚本
-3. 安装与运行指南
-准备环境: 确保已安装 Python 3，并创建和激活虚拟环境。
-安装依赖: 在激活的虚拟环境中运行 pip install Flask Flask-SQLAlchemy Flask-Migrate Flask-Login markdown bleach python-dotenv Flask-Whooshee。
-初始化数据库: 首次运行时，在项目根目录（D:\az\blog）下依次执行以下命令：
-flask db init
-flask db migrate -m "Initial migration"
-flask db upgrade
-创建管理员账号 (可选):
-flask create-admin (按照提示输入信息)
-运行应用:
-flask run
-在浏览器中访问 http://127.0.0.1:5000
-4. 完整代码清单
-4.1 根目录文件 (D:\az\blog)
-.flaskenv
-代码段
+└── run.py                 # <--- 启动脚本
+```
 
+## 安装与运行
+
+### 1. 准备环境
+
+-   确保你已经安装了 Python 3。
+-   创建一个虚拟环境并激活它。
+
+    ```bash
+    # 进入你的项目根目录
+    cd D:\az\blog
+
+    # 创建虚拟环境 (如果还没有)
+    python -m venv .venv
+
+    # 激活虚拟环境 (Windows PowerShell)
+    .venv\Scripts\Activate.ps1
+    ```
+
+### 2. 安装依赖
+
+-   安装所有必要的 Python 包。
+
+    ```bash
+    pip install Flask Flask-SQLAlchemy Flask-Migrate Flask-Login markdown bleach python-dotenv Flask-Whooshee
+    ```
+
+### 3. 初始化数据库
+
+-   在第一次运行前，需要初始化数据库和迁移脚本。
+
+    ```bash
+    # (确保你在 D:\az\blog 目录下，并且虚拟环境已激活)
+
+    # 1. 初始化迁移环境
+    flask db init
+
+    # 2. 生成迁移脚本
+    flask db migrate -m "Initial database structure for blog"
+
+    # 3. 应用迁移到数据库
+    flask db upgrade
+    ```
+
+### 4. 运行应用
+
+-   使用 `flask run` 命令启动开发服务器。
+
+    ```bash
+    flask run
+    ```
+-   在浏览器中打开 `http://127.0.0.1:5000` 即可访问你的博客。
+
+---
+
+## 完整代码清单
+
+以下是项目核心文件的完整代码。
+
+### 根目录文件
+
+#### `.flaskenv`
+
+这个文件为 Flask CLI 提供了必要的环境变量。
+
+```env
 FLASK_APP=run.py
 FLASK_DEBUG=1
-run.py
-Python
+```
 
-# D:/az/blog/run.py
+#### `run.py`
+
+应用的启动入口。
+
+```python
 import os
 from My_blog import create_app
 
-# 从 .flaskenv 文件中加载环境变量
+# 从 .flaskenv 或环境变量加载
 app = create_app()
 
 if __name__ == '__main__':
-    # 使用 `flask run` 命令启动更佳
+    # 推荐使用 `flask run` 命令启动
     app.run()
-4.2 核心应用包 (D:\az\blog\My_blog)
-__init__.py
-Python
+```
 
-# D:/az/blog/My_blog/__init__.py
+### `My_blog/` 核心应用包
+
+#### `__init__.py`
+
+应用工厂函数，负责创建和配置 Flask 应用实例。
+
+```python
 import os
 from flask import Flask
 from .config import Config
@@ -106,24 +149,28 @@ from .extensions import db, login_manager, migrate, whooshee
 from .models import User
 
 def create_app(config_class=Config):
-    """创建并配置 Flask 应用实例的工厂函数"""
+    """创建并配置 Flask 应用."""
+
     instance_folder = os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', 'instance')
-    app = Flask(__name__, instance_path=instance_folder) 
+    app = Flask(__name__, instance_path=instance_folder)
+
+    # 1. 先从对象加载配置
     app.config.from_object(config_class)
 
+    # 2. 确保 instance 文件夹存在
     try:
         os.makedirs(app.instance_path)
     except OSError:
-        pass 
+        pass # 文件夹已存在
 
-    # 初始化扩展
+    # 3. 初始化扩展
     db.init_app(app)
     login_manager.init_app(app)
-    from . import models
+    from . import models  # 在 db 初始化后导入模型
     migrate.init_app(app, db)
     whooshee.init_app(app)
 
-    # 注册蓝图
+    # 4. 导入并注册蓝图
     from .routes.main import bp as main_bp
     from .routes.auth import bp as auth_bp
     from .routes.admin import bp as admin_bp
@@ -131,16 +178,16 @@ def create_app(config_class=Config):
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(admin_bp, url_prefix='/admin')
 
-    # 注册自定义命令
+    # 5. 注册自定义命令
     from .command import init_app as init_command_app
     init_command_app(app)
 
-    # Shell 上下文
+    # 6. 定义 Shell 上下文
     @app.shell_context_processor
     def make_shell_context():
         return {
-            'db': db, 
-            'User': models.User, 
+            'db': db,
+            'User': models.User,
             'Post': models.Post,
             'Category': models.Category,
             'Tag': models.Tag,
@@ -148,29 +195,44 @@ def create_app(config_class=Config):
         }
 
     return app
-config.py
-Python
+```
 
-# D:/az/blog/My_blog/config.py
+#### `config.py`
+
+应用的配置类。
+
+```python
 import os
 
+# 获取项目根目录 (D:\az\blog)
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 class Config:
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'dev-secret-key-!@#$%'
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'a_super_secret_key_that_is_long_and_random'
+
+    # 数据库配置，指向 instance 文件夹
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
                               'sqlite:///' + os.path.join(project_root, 'instance', 'blog.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    # 分页配置
     POSTS_PER_PAGE = 5
     COMMENTS_PER_PAGE = 10
+
+    # 文件上传配置
     UPLOADED_MEDIA_DEST = os.path.join(project_root, 'My_blog', 'static', 'uploads')
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'mp4', 'webm', 'ogg'}
-    MAX_CONTENT_LENGTH = 16 * 1024 * 1024
-    WHOOSHEE_MIN_STRING_LEN = 1
-extensions.py
-Python
+    MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # 16 MB
 
-# D:/az/blog/My_blog/extensions.py
+    # Whooshee 全文搜索
+    WHOOSHEE_MIN_STRING_LEN = 1
+```
+
+#### `extensions.py`
+
+集中管理 Flask 扩展实例。
+
+```python
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
@@ -184,12 +246,14 @@ login_manager = LoginManager()
 migrate = Migrate()
 whooshee = Whooshee()
 
+# 指定未登录时跳转的视图
 login_manager.login_view = 'auth.login'
 login_manager.login_message = '请先登录以访问此页面。'
 login_manager.login_message_category = 'info'
 
 @login_manager.user_loader
 def load_user(user_id):
+    # 需要在这里导入 User 模型以避免循环依赖
     from .models import User
     return User.query.get(int(user_id))
 
@@ -197,13 +261,16 @@ def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if not current_user.is_authenticated or not getattr(current_user, 'is_admin', False):
-            abort(403)
+            abort(403) # Forbidden
         return f(*args, **kwargs)
     return decorated_function
-models.py
-Python
+```
 
-# D:/az/blog/My_blog/models.py
+#### `models.py`
+
+定义数据库模型。
+
+```python
 from datetime import datetime, timezone
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -212,6 +279,7 @@ from .extensions import db, whooshee
 import markdown
 import bleach
 
+# 文章和标签的多对多关联表
 post_tags = db.Table('post_tags',
     db.Column('post_id', db.Integer, db.ForeignKey('post.id'), primary_key=True),
     db.Column('tag_id', db.Integer, db.ForeignKey('tag.id'), primary_key=True)
@@ -243,6 +311,16 @@ class Tag(db.Model):
     name = db.Column(db.String(50), unique=True, nullable=False)
     def __repr__(self): return f'<Tag {self.name}>'
 
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    body = db.Column(db.Text, nullable=False)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey('post.id'), nullable=False)
+    parent_id = db.Column(db.Integer, db.ForeignKey('comment.id'))
+    replies = db.relationship('Comment', backref=db.backref('parent', remote_side=[id]), lazy='dynamic', cascade='all, delete-orphan')
+    def __repr__(self): return f'<Comment {self.body[:20]}...>'
+
 @whooshee.register_model('title', 'body')
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -257,7 +335,7 @@ class Post(db.Model):
     tags = db.relationship('Tag', secondary=post_tags, backref=db.backref('posts', lazy='dynamic'))
 
     def __repr__(self): return f'<Post {self.title}>'
-    
+
     def generate_slug(self, title_to_slug=None):
         if not title_to_slug: title_to_slug = self.title
         s = title_to_slug.lower().strip()
@@ -279,67 +357,26 @@ class Post(db.Model):
     @staticmethod
     def on_changed_body(target, value, oldvalue, initiator):
         allowed_tags = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code', 'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul',
-                        'h1', 'h2', 'h3', 'p', 'img', 'video', 'source', 'audio', 'br', 'hr', 'span']
-        allowed_attrs = {'*': ['class', 'style'], 'a': ['href', 'title'],
-                         'img': ['src', 'alt', 'title', 'width', 'height'],
-                         'video': ['src', 'controls', 'width', 'height', 'poster'],
+                        'h1', 'h2', 'h3', 'p', 'img', 'video', 'source', 'audio', 'br', 'hr']
+        allowed_attrs = {'*': ['class'], 'a': ['href', 'title'],
+                         'img': ['src', 'alt', 'title', 'width', 'height', 'style'],
+                         'video': ['src', 'controls', 'width', 'height', 'poster', 'style'],
                          'source': ['src', 'type'], 'audio': ['src', 'controls']}
-        html = markdown.markdown(value, extensions=['fenced_code', 'tables', 'attr_list'])
+        html = markdown.markdown(value, output_format='html', extensions=['fenced_code', 'tables', 'attr_list'])
         target.body_html = bleach.linkify(bleach.clean(html, tags=allowed_tags, attributes=allowed_attrs, strip=True))
 
 db.event.listen(Post.body, 'set', Post.on_changed_body)
+```
 
-class Comment(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    body = db.Column(db.Text, nullable=False)
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    post_id = db.Column(db.Integer, db.ForeignKey('post.id'), nullable=False)
-    parent_id = db.Column(db.Integer, db.ForeignKey('comment.id'))
-    replies = db.relationship('Comment', backref=db.backref('parent', remote_side=[id]), lazy='dynamic', cascade='all, delete-orphan')
-    def __repr__(self): return f'<Comment {self.body[:20]}...>'
-command.py
-Python
+#### `routes/main.py`
 
-# D:/az/blog/My_blog/command.py
-import click
-from flask.cli import with_appcontext
-from .extensions import db
-from .models import User
+处理核心功能（首页、文章页、创建、编辑、上传等）的路由。
 
-def init_app(app):
-    app.cli.add_command(create_admin_command)
-
-@click.command('create-admin')
-@with_appcontext
-def create_admin_command():
-    """创建一个管理员账户。"""
-    username = click.prompt('输入管理员用户名', default='admin')
-    email = click.prompt('输入管理员邮箱', default=f'{username}@example.com')
-    password = click.prompt('输入管理员密码', hide_input=True, confirmation_prompt=True)
-    
-    if User.query.filter_by(username=username).first():
-        click.echo(f'错误：用户名 "{username}" 已存在！')
-        return
-    if User.query.filter_by(email=email).first():
-        click.echo(f'错误：邮箱 "{email}" 已存在！')
-        return
-        
-    admin = User(username=username, email=email, is_admin=True)
-    admin.set_password(password)
-    db.session.add(admin)
-    db.session.commit()
-    
-    click.echo(f'管理员 "{username}" 创建成功！')
-4.3 路由包 (D:\az\blog\My_blog\routes)
-main.py
-Python
-
-# D:/az/blog/My_blog/routes/main.py
-from flask import (render_template, Blueprint, request, redirect, url_for, 
-                   flash, current_app, g, session, jsonify, abort)
+```python
+from flask import (render_template, Blueprint, request, redirect, url_for,
+                   flash, current_app, g, session, jsonify, send_from_directory)
 from werkzeug.utils import secure_filename
-from ..models import db, Post, Comment, Category, Tag, User 
+from ..models import db, Post, Comment, Category, Tag
 from flask_login import login_required, current_user
 import datetime
 import os
@@ -354,7 +391,11 @@ def before_request():
 
 @bp.route('/favicon.ico')
 def favicon():
-    return current_app.send_static_file('favicon.ico')
+    try:
+        return send_from_directory(os.path.join(current_app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
+    except FileNotFoundError:
+        return '', 204
 
 @bp.route('/set-visual-theme/<theme_name>')
 def set_visual_theme(theme_name):
@@ -377,38 +418,40 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in current_app.config['ALLOWED_EXTENSIONS']
 
 @bp.route('/upload', methods=['POST'])
-@login_required 
+@login_required
 def upload_file():
-    if 'file' not in request.files: return jsonify({'error': '未找到文件'}), 400
+    if 'file' not in request.files: return jsonify({'error': 'No file part'}), 400
     file = request.files['file']
-    if file.filename == '': return jsonify({'error': '未选择文件'}), 400
+    if file.filename == '': return jsonify({'error': 'No selected file'}), 400
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         upload_folder = current_app.config['UPLOADED_MEDIA_DEST']
         os.makedirs(upload_folder, exist_ok=True)
-        base, ext = os.path.splitext(filename)
-        counter = 1
         filepath = os.path.join(upload_folder, filename)
+        base, ext = os.path.splitext(filepath)
+        counter = 1
         while os.path.exists(filepath):
-            filename = f"{base}_{counter}{ext}"
-            filepath = os.path.join(upload_folder, filename)
+            filepath = f"{base}_{counter}{ext}"
+            filename = f"{os.path.basename(base)}_{counter}{ext}"
             counter += 1
         try:
             file.save(filepath)
-            file_url = url_for('static', filename=f'uploads/{filename}')
+            file_url = url_for('static', filename=f'uploads/{filename}', _external=False)
             return jsonify({'url': file_url})
         except Exception as e:
-            return jsonify({'error': f'无法保存文件: {str(e)}'}), 500
-    return jsonify({'error': '文件类型不允许'}), 400
+            current_app.logger.error(f"File save error: {e}")
+            return jsonify({'error': f'Could not save file: {str(e)}'}), 500
+    else:
+        return jsonify({'error': 'File type not allowed'}), 400
 
 @bp.route('/post/<slug>')
 def post(slug):
-    post = Post.query.filter_by(slug=slug).first_or_404()
+    post_instance = Post.query.filter_by(slug=slug).first_or_404()
     page = request.args.get('page', 1, type=int)
-    per_page = current_app.config.get('COMMENTS_PER_PAGE', 10)
-    pagination = post.comments.filter_by(parent_id=None).order_by(Comment.timestamp.asc()).paginate(page=page, per_page=per_page, error_out=False)
-    comments = pagination.items
-    return render_template('post.html', title=post.title, post=post, comments=comments, pagination=pagination)
+    comments_per_page = current_app.config.get('COMMENTS_PER_PAGE', 10)
+    comments_pagination = post_instance.comments.filter(Comment.parent_id == None).order_by(Comment.timestamp.asc()).paginate(page=page, per_page=comments_per_page, error_out=False)
+    comments = comments_pagination.items
+    return render_template('post.html', title=post_instance.title, post=post_instance, comments=comments, pagination=comments_pagination)
 
 @bp.route('/create', methods=['GET', 'POST'])
 @login_required
@@ -416,261 +459,37 @@ def create_post():
     if request.method == 'POST':
         title = request.form.get('title')
         body = request.form.get('body')
-        category_name = request.form.get('category', '').strip()
-        tags_str = request.form.get('tags', '')
-
+        category_name = request.form.get('category')
+        tag_names_str = request.form.get('tags', '')
         if not title or not body:
-            flash('标题和内容是必填项！', 'danger')
-            return render_template('create_post.html', title_data=title, body_data=body, category_data=category_name, tags_data=tags_str)
-
+            flash('标题和内容不能为空！', 'danger')
+            return render_template('create_post.html', title='创建新文章', title_data=title, body_data=body, category_data=category_name, tags_data=tag_names_str)
         category = None
-        if category_name:
+        if category_name and category_name.strip():
+            category_name = category_name.strip()
             category = Category.query.filter_by(name=category_name).first()
-            if not category:
-                category = Category(name=category_name)
-                db.session.add(category)
-        
-        new_post = Post(title=title, body=body, author=current_user, category=category)
-        new_post.generate_slug()
-
-        tag_names = [name.strip() for name in tags_str.split(',') if name.strip()]
-        for tag_name in tag_names:
-            tag = Tag.query.filter_by(name=tag_name).first()
-            if not tag:
-                tag = Tag(name=tag_name)
-                db.session.add(tag)
-            if tag not in new_post.tags:
-                new_post.tags.append(tag)
-        
+            if not category: category = Category(name=category_name); db.session.add(category)
+        new_post = Post(title=title, body=body, author=current_user, category=category); new_post.generate_slug()
+        if tag_names_str:
+            tag_names = [name.strip() for name in tag_names_str.split(',') if name.strip()]
+            for tag_name in tag_names:
+                tag = Tag.query.filter_by(name=tag_name).first()
+                if not tag: tag = Tag(name=tag_name); db.session.add(tag)
+                if tag not in new_post.tags: new_post.tags.append(tag)
         db.session.add(new_post)
         try:
             db.session.commit()
-            flash('文章发布成功！', 'success')
+            flash('文章创建成功！', 'success')
             return redirect(url_for('main.index'))
         except Exception as e:
             db.session.rollback()
-            current_app.logger.error(f'创建文章失败: {e}')
-            flash('发布文章时发生错误，请稍后重试。', 'danger')
-            return render_template('create_post.html', title_data=title, body_data=body, category_data=category_name, tags_data=tags_str)
+            current_app.logger.error(f"创建文章失败: {e}")
+            flash(f'创建文章失败，请检查日志。', 'danger')
+            return render_template('create_post.html', title='创建新文章', title_data=title, body_data=body, category_data=category_name, tags_data=tag_names_str)
+    return render_template('create_post.html', title='创建新文章')
 
-    return render_template('create_post.html', title="创建新文章")
-
-@bp.route('/edit/<slug>', methods=['GET', 'POST'])
-@login_required
-def edit_post(slug):
-    post = Post.query.filter_by(slug=slug).first_or_404()
-    if post.author != current_user and not g.is_admin:
-        abort(403)
-    
-    if request.method == 'POST':
-        post.title = request.form.get('title')
-        post.body = request.form.get('body')
-        category_name = request.form.get('category', '').strip()
-        tags_str = request.form.get('tags', '')
-
-        category = None
-        if category_name:
-            category = Category.query.filter_by(name=category_name).first()
-            if not category:
-                category = Category(name=category_name)
-                db.session.add(category)
-        post.category = category
-        
-        post.tags.clear()
-        tag_names = [name.strip() for name in tags_str.split(',') if name.strip()]
-        for tag_name in tag_names:
-            tag = Tag.query.filter_by(name=tag_name).first()
-            if not tag:
-                tag = Tag(name=tag_name)
-                db.session.add(tag)
-            post.tags.append(tag)
-        
-        post.generate_slug(post.title)
-        db.session.add(post)
-        try:
-            db.session.commit()
-            flash('文章更新成功！', 'success')
-            return redirect(url_for('main.post', slug=post.slug))
-        except Exception as e:
-            db.session.rollback()
-            current_app.logger.error(f'更新文章失败: {e}')
-            flash('更新文章时发生错误。', 'danger')
-
-    tags_data = ', '.join(tag.name for tag in post.tags)
-    return render_template('edit_post.html', title="编辑文章", post=post, tags_data=tags_data)
-
-@bp.route('/post/<slug>/delete', methods=['POST'])
-@login_required
-def delete_post(slug):
-    post = Post.query.filter_by(slug=slug).first_or_404()
-    if post.author != current_user and not g.is_admin:
-        abort(403)
-    db.session.delete(post)
-    db.session.commit()
-    flash('文章已删除。', 'success')
-    return redirect(url_for('main.index'))
-
-@bp.route('/post/<slug>/comment', methods=['POST'])
-@login_required
-def add_comment(slug):
-    post = Post.query.filter_by(slug=slug).first_or_404()
-    body = request.form.get('body', '').strip()
-    parent_id = request.form.get('parent_id')
-
-    if not body:
-        flash('评论内容不能为空。', 'danger')
-        return redirect(url_for('main.post', slug=slug, _anchor='comment-form'))
-
-    parent = None
-    if parent_id and parent_id.isdigit():
-        parent = Comment.query.get(int(parent_id))
-        if not parent or parent.post_id != post.id:
-            flash('无效的回复目标。', 'danger')
-            return redirect(url_for('main.post', slug=slug))
-    
-    comment = Comment(body=body, author=current_user, post=post, parent=parent)
-    db.session.add(comment)
-    db.session.commit()
-    flash('评论成功！', 'success')
-    return redirect(url_for('main.post', slug=slug, _anchor=f'comment-{comment.id}'))
-auth.py
-Python
-
-# D:/az/blog/My_blog/routes/auth.py
-from flask import render_template, Blueprint, request, redirect, url_for, flash, current_app
-from urllib.parse import urlparse
-from flask_login import login_user, logout_user, current_user, login_required
-from ..models import db, User, Post
-
-bp = Blueprint('auth', __name__)
-
-@bp.route('/register', methods=['GET', 'POST'])
-def register():
-    if current_user.is_authenticated:
-        return redirect(url_for('main.index'))
-    if request.method == 'POST':
-        username = request.form.get('username')
-        email = request.form.get('email')
-        password = request.form.get('password')
-        password2 = request.form.get('password2')
-
-        if password != password2:
-            flash('两次输入的密码不一致。', 'danger')
-            return redirect(url_for('auth.register'))
-        if User.query.filter_by(username=username).first():
-            flash('该用户名已被使用。', 'warning')
-            return redirect(url_for('auth.register'))
-        if User.query.filter_by(email=email).first():
-            flash('该邮箱已被注册。', 'warning')
-            return redirect(url_for('auth.register'))
-
-        user = User(username=username, email=email)
-        user.set_password(password)
-        db.session.add(user)
-        db.session.commit()
-        flash('恭喜，您已成功注册！', 'success')
-        return redirect(url_for('auth.login'))
-    return render_template('register.html', title='注册')
-
-@bp.route('/login', methods=['GET', 'POST'])
-def login():
-    if current_user.is_authenticated:
-        return redirect(url_for('main.index'))
-    if request.method == 'POST':
-        username = request.form.get('username')
-        password = request.form.get('password')
-        remember = request.form.get('remember_me') is not None
-        user = User.query.filter_by(username=username).first()
-        if user is None or not user.check_password(password):
-            flash('无效的用户名或密码。', 'danger')
-            return redirect(url_for('auth.login'))
-        login_user(user, remember=remember)
-        next_page = request.args.get('next')
-        if not next_page or urlparse(next_page).netloc != '':
-            next_page = url_for('main.index')
-        return redirect(next_page)
-    return render_template('login.html', title='登录')
-
-@bp.route('/logout')
-def logout():
-    logout_user()
-    return redirect(url_for('main.index'))
-
-@bp.route('/profile/<username>')
-def profile(username):
-    user = User.query.filter_by(username=username).first_or_404()
-    page = request.args.get('page', 1, type=int)
-    per_page = current_app.config.get('POSTS_PER_PAGE', 5)
-    pagination = Post.query.filter_by(author=user).order_by(Post.timestamp.desc()).paginate(
-        page=page, per_page=per_page, error_out=False
-    )
-    posts = pagination.items
-    return render_template('profile.html', title=f"{user.username} 的个人主页", user=user, posts=posts, pagination=pagination)
-
-@bp.route('/edit_profile', methods=['GET', 'POST'])
-@login_required
-def edit_profile():
-    if request.method == 'POST':
-        new_username = request.form.get('username').strip()
-        about_me = request.form.get('about_me').strip()
-
-        if new_username and new_username != current_user.username:
-            if User.query.filter(User.username == new_username, User.id != current_user.id).first():
-                flash('该用户名已被使用。', 'warning')
-                return render_template('edit_profile.html', title='编辑资料', user=current_user)
-            current_user.username = new_username
-        
-        current_user.about_me = about_me
-        db.session.commit()
-        flash('您的资料已更新。', 'success')
-        return redirect(url_for('auth.profile', username=current_user.username))
-    return render_template('edit_profile.html', title='编辑资料', user=current_user)
-admin.py
-Python
-
-# D:/az/blog/My_blog/routes/admin.py
-from flask import render_template, Blueprint, request, current_app, redirect, url_for, flash
-from flask_login import login_required
-from ..extensions import admin_required
-from ..models import db, User, Post
-
-bp = Blueprint('admin', __name__)
-
-@bp.route('/')
-@login_required
-@admin_required
-def index():
-    return render_template('admin/index.html', title="管理后台")
-
-@bp.route('/users')
-@login_required
-@admin_required
-def manage_users():
-    page = request.args.get('page', 1, type=int)
-    per_page = 15
-    pagination = User.query.order_by(User.member_since.desc()).paginate(page=page, per_page=per_page, error_out=False)
-    users = pagination.items
-    return render_template('admin/users.html', title="用户管理", users=users, pagination=pagination)
-
-@bp.route('/posts')
-@login_required
-@admin_required
-def manage_posts():
-    page = request.args.get('page', 1, type=int)
-    per_page = 15
-    pagination = Post.query.order_by(Post.timestamp.desc()).paginate(page=page, per_page=per_page, error_out=False)
-    posts = pagination.items
-    return render_template('admin/posts.html', title="文章管理", posts=posts, pagination=pagination)
-
-@bp.route('/delete_post_admin/<int:post_id>', methods=['POST'])
-@login_required
-@admin_required
-def delete_post_admin(post_id):
-    post = Post.query.get_or_404(post_id)
-    db.session.delete(post)
-    db.session.commit()
-    flash(f'文章 "{post.title}" 已从后台删除。', 'success')
-    return redirect(url_for('admin.manage_posts'))
+# ... 其他路由 (edit, delete, comment, search) ...
+```
 4.4 静态文件 (D:\az\blog\My_blog\static)
 css/style.css
 CSS
