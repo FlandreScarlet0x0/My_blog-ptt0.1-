@@ -318,7 +318,7 @@
             }
         } catch (err) {}
     });
-})();oading theme.js…]()
+  })();oading theme.js…]()
 ```
 
 - background_fade.js
