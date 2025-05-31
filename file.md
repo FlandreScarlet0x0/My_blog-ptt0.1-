@@ -261,7 +261,8 @@
 - theme.js
 - ```
   [Upl// static/js/theme.js
-
+  ```
+- ```
 (function() {
     const htmlElement = document.documentElement;
     const themeToggleButton = document.getElementById('themeToggle');
