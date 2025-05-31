@@ -1,0 +1,128 @@
+{# D:\az\blog\My_blog\templates\create_post.html #}
+{% extends "base.html" %}
+
+{% block title %}创建新文章 - 我的博客{% endblock %}
+
+{% block head_extra %}
+<style>
+    .EasyMDEContainer { border-color: var(--bs-border-color); }
+    .CodeMirror { background-color: var(--bs-body-bg); color: var(--bs-body-color); border-color: var(--bs-border-color); }
+    .editor-toolbar { background-color: var(--bs-tertiary-bg); border-color: var(--bs-border-color); }
+    .editor-toolbar a { color: var(--bs-body-color) !important; }
+    .editor-preview, .editor-preview-side { background-color: var(--bs-body-bg); }
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="main-content-wrapper" class="container mt-4 mb-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="card-title">创建新文章</h2>
+            <hr>
+            {# 显示 Flash 消息 #}
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert-{{ category or 'info' }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+
+            <form method="POST" action="{{ url_for('main.create_post') }}" id="post-form">
+                <div class="mb-3">
+                    <label for="title" class="form-label">标题</label>
+                    <input type="text" class="form-control" id="title" name="title" value="{{ title_data or '' }}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="category" class="form-label">分类 (可选)</label>
+                    <input type="text" class="form-control" id="category" name="category" value="{{ category_data or '' }}" placeholder="例如: 技术, 生活">
+                </div>
+                <div class="mb-3">
+                    <label for="tags" class="form-label">标签 (用逗号分隔, 可选)</label>
+                    <input type="text" class="form-control" id="tags" name="tags" value="{{ tags_data or '' }}" placeholder="例如: Flask, Python">
+                </div>
+                <div class="mb-3">
+                    <label for="body" class="form-label">内容 (支持 Markdown)</label>
+                    {# 使用上次提供的值填充，防止因 Flash 刷新丢失内容 #}
+                    <textarea class="form-control" id="body" name="body" rows="15" >{{ body_data or '' }}</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> 发布文章</button>
+                <a href="{{ url_for('main.index') }}" class="btn btn-secondary ms-2 internal-link"><i class="fas fa-times"></i> 取消</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof EasyMDE !== 'undefined') {
+        var easyMDE = new EasyMDE({
+            element: document.getElementById("body"),
+            spellChecker: false,
+            autosave: { enabled: true, uniqueId: "create_post_{{ current_user.id if current_user.is_authenticated else 'anon' }}", delay: 2000 },
+            toolbar: [ "bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link",
+                { name: "image", action: function(editor) { selectAndUploadFile(editor, 'image'); }, className: "fa fa-image", title: "上传图片" },
+                { name: "video", action: function(editor) { selectAndUploadFile(editor, 'video'); }, className: "fa fa-video", title: "上传视频" },
+                "|", "preview", "side-by-side", "fullscreen", "|", "guide" ],
+        });
+
+        function selectAndUploadFile(editor, type) {
+            var input = document.createElement('input');
+            input.type = 'file';
+            input.accept = type === 'image' ? 'image/png, image/jpeg, image/gif' : 'video/mp4, video/webm, video/ogg';
+            input.onchange = e => {
+                var file = e.target.files[0];
+                if (file) { uploadFile(file, editor, type); }
+            }
+            input.click();
+        }
+
+        function uploadFile(file, editor, type) {
+            var formData = new FormData();
+            formData.append('file', file);
+            var cm = editor.codemirror;
+            var doc = cm.getDoc();
+            var cursor = doc.getCursor();
+            var placeholderText = `\n[上传中: ${file.name}...]\n`;
+            doc.replaceRange(placeholderText, cursor);
+
+            fetch("{{ url_for('main.upload_file') }}", { method: 'POST', body: formData })
+            .then(response => {
+                if (!response.ok) { return response.json().then(err => { throw new Error(err.error || `HTTP ${response.status}`); }); }
+                return response.json();
+            })
+            .then(data => {
+                let output = '';
+                if (data.url) {
+                    output = type === 'image' ? `![${file.name}](${data.url})\n` : `\n<video width="100%" controls>\n  <source src="${data.url}" type="${file.type}">\n  您的浏览器不支持视频标签。\n</video>\n`;
+                } else {
+                    alert('上传失败: ' + (data.error || '未知错误'));
+                }
+                var currentContent = doc.getValue();
+                var placeholderIndex = currentContent.indexOf(placeholderText);
+                if (placeholderIndex > -1) {
+                    doc.replaceRange(output, doc.posFromIndex(placeholderIndex), doc.posFromIndex(placeholderIndex + placeholderText.length));
+                } else {
+                    doc.replaceRange(output, cursor);
+                }
+            })
+            .catch(error => {
+                alert('上传发生错误: ' + error.message);
+                var currentContent = doc.getValue();
+                var placeholderIndex = currentContent.indexOf(placeholderText);
+                if (placeholderIndex > -1) {
+                    doc.replaceRange('', doc.posFromIndex(placeholderIndex), doc.posFromIndex(placeholderIndex + placeholderText.length));
+                }
+                console.error('上传错误:', error);
+            });
+        }
+    } else { console.error("EasyMDE 未加载!"); }
+});
+</script>
+{% endblock %}
