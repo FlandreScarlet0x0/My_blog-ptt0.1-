@@ -261,13 +261,12 @@
 - theme.js
 - ```
   [Upl// static/js/theme.js
-  ```
-- ```
-(function() {
-    const htmlElement = document.documentElement;
-    const themeToggleButton = document.getElementById('themeToggle');
-    const sunIconClass = 'fas fa-sun';
-    const moonIconClass = 'fas fa-moon';
+
+    (function() {
+        const htmlElement = document.documentElement;
+        const themeToggleButton = document.getElementById('themeToggle');
+        const sunIconClass = 'fas fa-sun';
+        const moonIconClass = 'fas fa-moon';
 
     function applyTheme(theme) {
         document.documentElement.style.transition = 'background-color 0.3s ease, color 0.3s ease';
@@ -290,36 +289,36 @@
         }
     }
 
-    // 初始主题设置
-    const currentInitialTheme = htmlElement.getAttribute('data-theme') || 'light';
-    if (themeToggleButton) {
-        if (currentInitialTheme === 'dark') {
-            themeToggleButton.innerHTML = `<i class="${sunIconClass}"></i>`;
-            themeToggleButton.setAttribute('title', '切换到浅色模式');
-        } else {
+        // 初始主题设置
+        const currentInitialTheme = htmlElement.getAttribute('data-theme') || 'light';
+        if (themeToggleButton) {
+            if (currentInitialTheme === 'dark') {
+                themeToggleButton.innerHTML = `<i class="${sunIconClass}"></i>`;
+                themeToggleButton.setAttribute('title', '切换到浅色模式');
+            } else {
             themeToggleButton.innerHTML = `<i class="${moonIconClass}"></i>`;
             themeToggleButton.setAttribute('title', '切换到深色模式');
-        }
-    }
-
-    // 主题切换按钮事件
-    if (themeToggleButton) {
-        themeToggleButton.addEventListener('click', () => {
-            const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            applyTheme(newTheme);
-        });
-    }
-
-    // 系统主题变化监听
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-        try {
-            if (!localStorage.getItem('theme')) {
-                applyTheme(e.matches ? 'dark' : 'light');
             }
-        } catch (err) {}
-    });
-  })();oading theme.js…]()
+        }
+
+        // 主题切换按钮事件
+        if (themeToggleButton) {
+            themeToggleButton.addEventListener('click', () => {
+                const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                applyTheme(newTheme);
+            });
+        }
+
+        // 系统主题变化监听
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            try {
+                if (!localStorage.getItem('theme')) {
+                    applyTheme(e.matches ? 'dark' : 'light');
+                }
+            } catch (err) {}
+        });
+    })();oading theme.js…]()
 ```
 
 - background_fade.js
