@@ -1,16 +1,17 @@
-# Static Files (blog\My_blog\static)
-- static
-    - style
-        - css/style.css
-            ```css
-/* static/css/style.css */
+# Project Structure
+## Static Files (blog/My_blog/static)
+### style
 
-/* ================== */
-/* ===  CSS 变量  === */
-/* ================== */
+- css/style.css
+- ```
+  [Uploa/* static/css/style.css */
 
-/* --- 浅色主题 (默认) --- */
-:root, [data-theme="light"], html[data-bs-theme="light"] {
+    /* ================== */
+    /* ===  CSS 变量  === */
+    /* ================== */
+
+    /* --- 浅色主题 (默认) --- */
+    :root, [data-theme="light"], html[data-bs-theme="light"] {
     --bs-primary: #0d6efd;
     --bs-secondary: #6c757d;
     --bs-success: #198754;
@@ -30,10 +31,10 @@
     --card-bg: #ffffff;
     --footer-bg: #f8f9fa;
     --footer-text-color: #6c757d;
-}
+    }
 
-/* --- 深色主题 --- */
-[data-theme="dark"], html[data-bs-theme="dark"] {
+    /* --- 深色主题 --- */
+    [data-theme="dark"], html[data-bs-theme="dark"] {
     --bs-primary: #6ea8fe;
     --bs-secondary: #adb5bd;
     --bs-success: #48a77a;
@@ -53,149 +54,150 @@
     --card-bg: #232a34; /* 深色卡片 */
     --footer-bg: #1a1a2e;
     --footer-text-color: #adb5bd;
-}
+    }
 
-/* --- 宁静蓝 (Blue) --- */
-html[data-bs-theme="light"] #ajax-content-container[data-current-theme="blue"] {
+    /* --- 宁静蓝 (Blue) --- */
+    html[data-bs-theme="light"] #ajax-content-container[data-current-theme="blue"] {
     --bs-primary: #007bff;
     --bs-link-color: #0056b3;
     --bs-link-hover-color: #007bff;
-}
-html[data-bs-theme="dark"] #ajax-content-container[data-current-theme="blue"] {
+    }
+    html[data-bs-theme="dark"] #ajax-content-container[data-current-theme="blue"] {
     --bs-primary: #4dabf7;
     --bs-link-color: #4dabf7;
     --bs-link-hover-color: #74c0fc;
-}
+    }
 
-/* --- 青春绿 (Green) --- */
-html[data-bs-theme="light"] #ajax-content-container[data-current-theme="green"] {
+    /* --- 青春绿 (Green) --- */
+    html[data-bs-theme="light"] #ajax-content-container[data-current-theme="green"] {
     --bs-primary: #28a745;
     --bs-link-color: #1e7e34;
     --bs-link-hover-color: #28a745;
-}
-html[data-bs-theme="dark"] #ajax-content-container[data-current-theme="green"] {
+    }
+    html[data-bs-theme="dark"] #ajax-content-container[data-current-theme="green"] {
     --bs-primary: #4dabf7;
     --bs-link-color: #4dabf7;
     --bs-link-hover-color: #74c0fc;
-}
+    }
 
-/* --- 活力橙 (Yuan) --- */
-html[data-bs-theme="light"] #ajax-content-container[data-current-theme="yuan"] {
+    /* --- 活力橙 (Yuan) --- */
+    html[data-bs-theme="light"] #ajax-content-container[data-current-theme="yuan"] {
     --bs-primary: #9c9c97;
     --bs-link-color: #4dabf7;
     --bs-link-hover-color: #74c0fc;
-}
-html[data-bs-theme="dark"] #ajax-content-container[data-current-theme="yuan"] {
+    }
+    html[data-bs-theme="dark"] #ajax-content-container[data-current-theme="yuan"] {
     --bs-primary: 	#f5f5dc;
     --bs-link-color: #4dabf7;
     --bs-link-hover-color: #74c0fc;
-}
+    }
 
 
-/* ================== */
-/* === 基本和通用 === */
-/* ================== */
-html, body {
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
+    /* ================== */
+    /* === 基本和通用 === */
+    /* ================== */
+    html, body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+    }
 
-body {
+    body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   padding-top: 70px; /* 导航栏高度补偿 */
   background-color: var(--bs-body-bg);
   color: var(--bs-body-color);
-}
+    }
 
-a {
-  color: var(--bs-link-color);
-  text-decoration: none;
-}
-a:hover {
-  color: var(--bs-link-hover-color);
-  text-decoration: underline;
-}
+    a {
+        color: var(--bs-link-color);
+        text-decoration: none;
+    }
+    a:hover {
+        color: var(--bs-link-hover-color);
+        text-decoration: underline;
+    }
 
-.card {
-    background-color: var(--card-bg);
-    border-color: var(--bs-border-color);
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-    opacity:0.8;
-}
+    .card {
+        background-color: var(--card-bg);
+        border-color: var(--bs-border-color);
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+        opacity:0.8;
+    }
 
-.btn-primary {
-    --bs-btn-bg: var(--bs-primary);
-    --bs-btn-border-color: var(--bs-primary);
-    --bs-btn-hover-bg: color-mix(in srgb, var(--bs-primary) 85%, black);
-    --bs-btn-hover-border-color: color-mix(in srgb, var(--bs-primary) 80%, black);
-}
+    .btn-primary {
+        --bs-btn-bg: var(--bs-primary);
+        --bs-btn-border-color: var(--bs-primary);
+        --bs-btn-hover-bg: color-mix(in srgb, var(--bs-primary) 85%, black);
+        --bs-btn-hover-border-color: color-mix(in srgb, var(--bs-primary) 80%, black);
+    }
 
-/* ================== */
-/* ===   导航栏   === */
-/* ================== */
-.navbar {
-    background-color: var(--navbar-bg) !important;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--bs-border-color-translucent);
-    transition: background-color 0.3s ease;
-}
-.navbar .navbar-brand { color: var(--bs-primary); font-weight: bold; }
-.navbar .nav-link { color: var(--bs-body-color); }
-.navbar .nav-link:hover, .navbar .nav-link:focus { color: var(--bs-primary); }
-.navbar .dropdown-menu { background-color: var(--card-bg); border-color: var(--bs-border-color-translucent); }
-.navbar .dropdown-item { color: var(--bs-body-color); }
-.navbar .dropdown-item:hover, .navbar .dropdown-item:focus { background-color: var(--bs-tertiary-bg); color: var(--bs-body-color); }
-.theme-toggle-button { background: none; border: none; color: var(--bs-body-color); font-size: 1.1rem; padding: 0.375rem 0.75rem; }
-.theme-toggle-button:hover { color: var(--bs-primary); }
+    /* ================== */
+    /* ===   导航栏   === */
+    /* ================== */
+    .navbar {
+        background-color: var(--navbar-bg) !important;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--bs-border-color-translucent);
+        transition: background-color 0.3s ease;
+    }
+    .navbar .navbar-brand { color: var(--bs-primary); font-weight: bold; }
+    .navbar .nav-link { color: var(--bs-body-color); }
+    .navbar .nav-link:hover, .navbar .nav-link:focus { color: var(--bs-primary); }
+    .navbar .dropdown-menu { background-color: var(--card-bg); border-color: var(--bs-border-color-translucent); }
+    .navbar .dropdown-item { color: var(--bs-body-color); }
+    .navbar .dropdown-item:hover, .navbar .dropdown-item:focus { background-color: var(--bs-tertiary-bg); color: var(--bs-body-color); }
+    .theme-toggle-button { background: none; border: none; color: var(--bs-body-color); font-size: 1.1rem; padding: 0.375rem 0.75rem; }
+    .theme-toggle-button:hover { color: var(--bs-primary); }
+```
+    /* ================== */
+    /* ===   内容区   === */
+    /* ================== */
+    .main-content {
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+        padding-top: 1rem;
+        padding-bottom: 2rem;
+    }
 
-/* ================== */
-/* ===   内容区   === */
-/* ================== */
-.main-content {
-  flex: 1;
-  position: relative;
-  overflow: hidden;
-  padding-top: 1rem;
-  padding-bottom: 2rem;
-}
+    .flash-messages-container {
+        position: sticky;
+        top: 70px; /* 导航栏高度 + 一点间距 */
+        z-index: 1050;
+        width: 100%;
+        max-width: 960px;
+        margin-left: auto;
+        margin-right: auto;
+        pointer-events: none; /* 允许点击穿透 */
+    }
+    .flash-messages-container .alert {
+        pointer-events: auto; /* 让 alert 可以被点击 */
+    }
 
-.flash-messages-container {
-    position: sticky;
-    top: 70px; /* 导航栏高度 + 一点间距 */
-    z-index: 1050;
-    width: 100%;
-    max-width: 960px;
-    margin-left: auto;
-    margin-right: auto;
-    pointer-events: none; /* 允许点击穿透 */
-}
-.flash-messages-container .alert {
-    pointer-events: auto; /* 让 alert 可以被点击 */
-}
-
-/* --- 背景伪元素 --- */
-.main-content::before,
-.main-content::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  pointer-events: none;
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  transition: opacity 0.6s ease-in-out; /* 稍长过渡 */
-  opacity: 0;
-  z-index: -1;
-}
-.main-content::before { background-image: var(--before-bg-image, none); }
-.main-content::after { background-image: var(--after-bg-image, none); }
-.main-content.js-bg-before-active::before { opacity: 1; }
-.main-content.js-bg-after-active::after { opacity: 1; }
-
+    /* --- 背景伪元素 --- */
+    .main-content::before,
+    .main-content::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    transition: opacity 0.6s ease-in-out; /* 稍长过渡 */
+    opacity: 0;
+    z-index: -1;
+    }
+    .main-content::before { background-image: var(--before-bg-image, none); }
+    .main-content::after { background-image: var(--after-bg-image, none); }
+    .main-content.js-bg-before-active::before { opacity: 1; }
+    .main-content.js-bg-after-active::after { opacity: 1; }
+```
+```
 /* --- 文章列表和详情 --- */
 .post-preview { max-height: 150px; overflow: hidden; color: var(--bs-secondary); }
 .post-content { line-height: 1.7; font-size: 1.1rem; }
@@ -204,16 +206,18 @@ a:hover {
 .post-content pre { background-color: var(--bs-tertiary-bg); padding: 1rem; border-radius: 5px; overflow-x: auto; }
 .post-content code { font-size: 0.9em; color: var(--bs-danger); background-color: var(--bs-tertiary-bg); padding: 0.2em 0.4em; border-radius: 3px; }
 .post-content pre code { color: inherit; background-color: transparent; padding: 0; }
-
+```
+```
 /* ================== */
 /* ===   评论区   === */
 /* ================== */
-#comments .card { background-color: color-mix(in srgb, var(--card-bg) 95%, transparent); }
-#comments .comment-entry { border-left: 3px solid var(--bs-border-color); }
-#comments .comment-entry .card-body { padding: 1rem; }
-.reply-link { font-size: 0.85em; cursor: pointer; color: var(--bs-secondary); }
-.reply-link:hover { color: var(--bs-primary); }
-
+    #comments .card { background-color: color-mix(in srgb, var(--card-bg) 95%, transparent); }
+    #comments .comment-entry { border-left: 3px solid var(--bs-border-color); }
+    #comments .comment-entry .card-body { padding: 1rem; }
+    .reply-link { font-size: 0.85em; cursor: pointer; color: var(--bs-secondary); }
+    .reply-link:hover { color: var(--bs-primary); }
+```
+```
 /* ================== */
 /* ===   EasyMDE  === */
 /* ================== */
@@ -223,12 +227,14 @@ a:hover {
 .editor-toolbar a { color: var(--bs-body-color) !important; }
 .editor-toolbar a:hover, .editor-toolbar a.active { background-color: var(--bs-border-color); border-color: var(--bs-border-color) !important; }
 .editor-preview, .editor-preview-side { background-color: var(--card-bg); border-color: var(--bs-border-color) !important; }
-
+```
+```
 /* ================== */
 /* ===   页脚     === */
 /* ================== */
 .footer { background-color: var(--footer-bg); color: var(--footer-text-color); transition: background-color 0.3s ease, color 0.3s ease; border-top: 1px solid var(--bs-border-color-translucent); }
-
+```
+```
 /* ================== */
 /* === 音乐播放器 === */
 /* ================== */
@@ -247,103 +253,141 @@ a:hover {
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
 }
-#theme-music-player:hover { opacity: 1; transform: scale(1.02); }
-        ```
-    - js
-         -  js/theme.js
-         ```
-javascript
+#theme-music-player:hover { opacity: 1; transform: scale(1.02); }ding style.css…]()
 ```
-### blog/My_blog/static/js/theme.js
-```
-document.addEventListener('DOMContentLoaded', () => {
-    const themeToggleButton = document.getElementById('themeToggle');
-    if (!themeToggleButton) return;
 
-    const sunIcon = '<i class="fas fa-sun"></i>';
-    const moonIcon = '<i class="fas fa-moon"></i>';
-    
-    const applyTheme = (theme) => {
-        document.documentElement.setAttribute('data-theme', theme);
-        document.documentElement.setAttribute('data-bs-theme', theme);
-        themeToggleButton.innerHTML = theme === 'dark' ? sunIcon : moonIcon;
-        try { localStorage.setItem('theme', theme); } catch (e) {}
+### js
+
+- theme.js
+- ```
+  [Upl// static/js/theme.js
+
+(function() {
+    const htmlElement = document.documentElement;
+    const themeToggleButton = document.getElementById('themeToggle');
+    const sunIconClass = 'fas fa-sun';
+    const moonIconClass = 'fas fa-moon';
+
+    function applyTheme(theme) {
+        document.documentElement.style.transition = 'background-color 0.3s ease, color 0.3s ease';
+        htmlElement.setAttribute('data-theme', theme);
+
+        if (themeToggleButton) {
+            if (theme === 'dark') {
+                themeToggleButton.innerHTML = `<i class="${sunIconClass}"></i>`;
+                themeToggleButton.setAttribute('title', '切换到浅色模式');
+            } else {
+                themeToggleButton.innerHTML = `<i class="${moonIconClass}"></i>`;
+                themeToggleButton.setAttribute('title', '切换到深色模式');
+            }
+        }
+
+        try {
+            localStorage.setItem('theme', theme);
+        } catch (e) {
+            console.warn("LocalStorage 不可用。主题偏好将不会被保存。");
+        }
+    }
+
+    // 初始主题设置
+    const currentInitialTheme = htmlElement.getAttribute('data-theme') || 'light';
+    if (themeToggleButton) {
+        if (currentInitialTheme === 'dark') {
+            themeToggleButton.innerHTML = `<i class="${sunIconClass}"></i>`;
+            themeToggleButton.setAttribute('title', '切换到浅色模式');
+        } else {
+            themeToggleButton.innerHTML = `<i class="${moonIconClass}"></i>`;
+            themeToggleButton.setAttribute('title', '切换到深色模式');
+        }
+    }
+
+    // 主题切换按钮事件
+    if (themeToggleButton) {
+        themeToggleButton.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(newTheme);
+        });
+    }
+
+    // 系统主题变化监听
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        try {
+            if (!localStorage.getItem('theme')) {
+                applyTheme(e.matches ? 'dark' : 'light');
+            }
+        } catch (err) {}
+    });
+})();oading theme.js…]()
+```
+
+- background_fade.js
+- ```
+  [Uploading back// static/js/background_fade.js
+
+    const themeImageUrls = {
+        light: "",
+        dark: "url('https://s21.ax1x.com/2025/05/02/pEbG0XD.jpg')",
+        blue: "url('https://s21.ax1x.com/2025/05/02/pEbGG79.jpg')",
+        green: "url('https://s21.ax1x.com/2025/05/02/pEb1xnH.jpg')",
+        yuan: "url('https://s21.ax1x.com/2025/05/02/pEbGlXF.jpg')"
     };
 
-    themeToggleButton.addEventListener('click', () => {
-        const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        applyTheme(newTheme);
-    });
+    const themeMusicUrls = {
+        light: "",
+        dark: "https://music.163.com/outchain/player?type=2&id=2034454236&auto=1&height=66",
+        blue: "https://music.163.com/outchain/player?type=2&id=1961353401&auto=1&height=66",
+        green: "https://music.163.com/outchain/player?type=2&id=1303019326&auto=0&height=66",
+        yuan: "https://music.163.com/outchain/player?type=2&id=29732992&auto=1&height=66"
+    };
 
-    // 初始化时设置正确的图标
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    themeToggleButton.innerHTML = currentTheme === 'dark' ? sunIcon : moonIcon;
-});
-js/background_fade.js
-javascript
-// static/js/background_fade.js
-const themeImageUrls = {
-    light: "",
-    dark: "url('https://s21.ax1x.com/2025/05/02/pEbG0XD.jpg')",
-    blue: "url('https://s21.ax1x.com/2025/05/02/pEbGG79.jpg')",
-    green: "url('https://s21.ax1x.com/2025/05/02/pEb1xnH.jpg')",
-    yuan: "url('https://s21.ax1x.com/2025/05/02/pEbGlXF.jpg')"
-};
-
-const themeMusicUrls = {
-    light: "",
-    dark: "https://music.163.com/outchain/player?type=2&id=2034454236&auto=1&height=66",
-    blue: "https://music.163.com/outchain/player?type=2&id=1961353401&auto=1&height=66",
-    green: "https://music.163.com/outchain/player?type=2&id=1303019326&auto=0&height=66",
-    yuan: "https://music.163.com/outchain/player?type=2&id=29732992&auto=1&height=66"
-};
-
-// --- 预加载图片 ---
-function preloadBackgroundImages(urls) {
-    Object.values(urls).forEach(url => {
-        if (url && url.startsWith('url(')) {
-            const imgUrl = url.match(/url\(['"]?(.*?)['"]?\)/)[1];
-            if (imgUrl !== 'none' && !imgUrl.startsWith('/static/images/none')) { // 避免加载 'none'
+    // --- 预加载图片 ---
+    function preloadBackgroundImages(urls) {
+        Object.values(urls).forEach(url => {
+            if (url && url.startsWith('url(')) {
+                const imgUrl = url.match(/url\(['"]?(.*?)['"]?\)/)[1];
+                if (imgUrl !== 'none' && !imgUrl.startsWith('/static/images/none')) { // 避免加载 'none'
                 const img = new Image();
                 img.src = imgUrl;
             }
         }
     });
-}
+    }
 
-function applyVisualBackgroundTheme() {
-    const mainContent = document.getElementById('ajax-content-container');
-    if (!mainContent) return;
-    mainContent.classList.add('main-content');
+    function applyVisualBackgroundTheme() {
+        const mainContent = document.getElementById('ajax-content-container');
+        if (!mainContent) return;
+            mainContent.classList.add('main-content');
 
-    const currentTheme = mainContent.dataset.currentTheme || 'light';
-    const previousTheme = sessionStorage.getItem('previous_theme_for_bg');
-    const beforeImage = themeImageUrls[previousTheme] || 'none';
-    const afterImage = themeImageUrls[currentTheme] || 'none';
+        const currentTheme = mainContent.dataset.currentTheme || 'light';
+        const previousTheme = sessionStorage.getItem('previous_theme_for_bg');
+        const beforeImage = themeImageUrls[previousTheme] || 'none';
+        const afterImage = themeImageUrls[currentTheme] || 'none';
 
-    mainContent.style.setProperty('--before-bg-image', beforeImage);
-    mainContent.style.setProperty('--after-bg-image', afterImage);
-    mainContent.classList.remove('js-bg-before-active', 'js-bg-after-active');
+        mainContent.style.setProperty('--before-bg-image', beforeImage);
+        mainContent.style.setProperty('--after-bg-image', afterImage);
+        mainContent.classList.remove('js-bg-before-active', 'js-bg-after-active');
 
-    if (previousTheme && previousTheme !== currentTheme && beforeImage !== 'none' && afterImage !== 'none') {
+        if (previousTheme && previousTheme !== currentTheme && beforeImage !== 'none' && afterImage !== 'none') {
         mainContent.classList.add('js-bg-before-active');
         setTimeout(() => {
             mainContent.classList.add('js-bg-after-active');
             mainContent.classList.remove('js-bg-before-active');
             mainContent.style.setProperty('--before-bg-image', afterImage);
         }, 600);
-    } else {
+    } 
+        else {
         mainContent.classList.add('js-bg-after-active');
         mainContent.style.setProperty('--before-bg-image', afterImage);
     }
 
     handleThemeMusic(currentTheme);
     sessionStorage.setItem('previous_theme_for_bg', currentTheme);
-}
+    }
 
-function handleThemeMusic(theme) {
-    const musicPlayer = document.getElementById('theme-music-player');
-    if (!musicPlayer) return;
+    function handleThemeMusic(theme) {
+        const musicPlayer = document.getElementById('theme-music-player');
+        if (!musicPlayer) return;
 
     const musicUrl = themeMusicUrls[theme] || "";
     const currentSrc = musicPlayer.getAttribute('src');
@@ -356,38 +400,39 @@ function handleThemeMusic(theme) {
     // 根据是否有 URL 来决定显示或隐藏
     musicPlayer.style.display = musicUrl ? 'block' : 'none';
     // **************************************
-}
-
-// --- 初始化函数 ---
-function initializePageElements() {
-    const mainContent = document.getElementById('ajax-content-container');
-    if (mainContent) {
-        mainContent.classList.add('main-content');
-        applyVisualBackgroundTheme(); // 应用背景
-        // 初始加载时，也让 handleThemeMusic 检查一次
-        handleThemeMusic(mainContent.dataset.currentTheme || 'light');
     }
-}
 
-// --- 事件监听 ---
-document.addEventListener('DOMContentLoaded', () => {
-    preloadBackgroundImages(themeImageUrls);
-    initializePageElements();
-
-    window.addEventListener('beforeunload', () => {
+    // --- 初始化函数 ---
+    function initializePageElements() {
         const mainContent = document.getElementById('ajax-content-container');
         if (mainContent) {
-             sessionStorage.setItem('previous_theme_for_bg', mainContent.dataset.currentTheme || 'light');
+            mainContent.classList.add('main-content');
+            applyVisualBackgroundTheme(); // 应用背景
+            // 初始加载时，也让 handleThemeMusic 检查一次
+            handleThemeMusic(mainContent.dataset.currentTheme || 'light');
         }
-    });
-});
+    }
 
-// --- 暴露给 navigation.js ---
-window.reapplyVisualBackgroundTheme = initializePageElements; // AJAX 加载后调用这个
+    // --- 事件监听 ---
+    document.addEventListener('DOMContentLoaded', () => {
+        preloadBackgroundImages(themeImageUrls);
+        initializePageElements();
+
+        window.addEventListener('beforeunload', () => {
+            const mainContent = document.getElementById('ajax-content-container');
+            if (mainContent) {
+                sessionStorage.setItem('previous_theme_for_bg', mainContent.dataset.currentTheme || 'light');
+            }
+        });
+    });
+
+    // --- 暴露给 navigation.js ---
+    window.reapplyVisualBackgroundTheme = initializePageElements; // AJAX 加载后调用这个ground_fade.js…]()
 ```
-## js/navigation.js
-javascript
-### static/js/navigation.js
+
+- navigation.js
+```
+[Up// static/js/navigation.js
 document.addEventListener('DOMContentLoaded', () => {
     const ajaxContainerId = 'ajax-content-container';
 
@@ -466,11 +511,13 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('popstate', event => {
         if (event.state?.path) { loadPage(event.state.path, false); }
     });
-});
-## templates
-### templates/base.html
-html
-<!doctype html>
+});loading navigation.js…]()
+```
+
+## Templates
+- base.html
+- ```
+  [Uploadin<!doctype html>
 <html lang="zh-CN"> {# JS 会在这里设置 data-theme 和 data-bs-theme #}
 <head>
     <meta charset="utf-8">
@@ -624,10 +671,12 @@ html
 
     {% block scripts %}{% endblock %}
 </body>
-</html>
-create_post.html
-html
-{# D:\az\blog\My_blog\templates\create_post.html #}
+</html>g base.html…]()
+```
+
+- create_post.html
+- ```
+  [Uploading {# D:\az\blog\My_blog\templates\create_post.html #}
 {% extends "base.html" %}
 
 {% block title %}创建新文章 - 我的博客{% endblock %}
@@ -754,10 +803,12 @@ document.addEventListener('DOMContentLoaded', function() {
     } else { console.error("EasyMDE 未加载!"); }
 });
 </script>
-{% endblock %}
-###edit_post.html
-html
-{% extends "base.html" %}
+{% endblock %}create_post.html…]()
+```
+
+- edit_post.html
+- ```
+  [Uploading edit_po{% extends "base.html" %}
 
 {% block title %}编辑文章 - {{ post.title }} - 我的博客{% endblock %}
 
@@ -911,10 +962,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
-{% endblock %}
-edit_profile.html
-html
-{% extends "base.html" %}
+{% endblock %}st.html…]()
+```
+
+- edit_profile.html
+- ```
+  [Uploading edi{% extends "base.html" %}
 
 {% block title %}编辑资料 - 我的博客{% endblock %}
 
@@ -937,10 +990,12 @@ html
         <a href="{{ url_for('auth.profile', username=user.username) }}" class="btn btn-secondary ms-2">取消</a>
     </form>
 </div>
-{% endblock %}
-index.html
-html
-{% extends "base.html" %}
+{% endblock %}t_profile.html…]()
+```
+
+- index.html
+- ```
+  [Uploading ind{% extends "base.html" %}
 
 {% block title %}首页 - 我的博客{% endblock %}
 
@@ -1001,10 +1056,12 @@ html
     {% endif %}
 
 </div>
-{% endblock %}
-login.html
-html
-{% extends "base.html" %}
+{% endblock %}ex.html…]()
+```
+
+- login.html
+- ```
+  [Uploadi{% extends "base.html" %}
 
 {% block title %}登录 - 我的博客{% endblock %}
 
@@ -1031,10 +1088,12 @@ html
         <p class="text-center">还没有账号？<a href="{{ url_for('auth.register') }}" class="internal-link">立即注册</a></p>
     </div>
 </div>
-{% endblock %}
-post.html
-html
-{% extends "base.html" %}
+{% endblock %}ng login.html…]()
+```
+
+- post.html
+- ```
+  [Uploadi{% extends "base.html" %}
 
 {% block title %}{{ post.title }} - 我的博客{% endblock %}
 
@@ -1223,10 +1282,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
-{% endblock %}
-profile.html
-html
-{% extends "base.html" %}
+{% endblock %}ng post.html…]()
+```
+
+- profile.html
+- ```
+[Uploading pr{% extends "base.html" %}
 {% block title %}{{ user.username }}的资料{% endblock %}
 
 {% block content %}
@@ -1307,9 +1368,11 @@ html
         </div>
     </div>
 </div>
-{% endblock %}
-register.html
-html
+{% endblock %}ofile.html…]()
+```
+
+- register.html
+```
 {% extends "base.html" %}
 
 {% block title %}注册 - 我的博客{% endblock %}
@@ -1341,3 +1404,4 @@ html
     </div>
 </div>
 {% endblock %}
+```
